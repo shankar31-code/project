@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+
 import RecipeDescription from './RecipeDescription';
 
 const UploadRecipe = () => {
@@ -10,7 +11,7 @@ const UploadRecipe = () => {
   const [loading, setLoading] = useState(false);
   const [activePopoverId, setActivePopoverId] = useState(null);
   const fetchRecipes = async () => {
-    const res = await axios.get('http://localhost:5000/api/recipes');
+    const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/recipes`);
     setRecipes(res.data);
   };
 
@@ -33,7 +34,7 @@ const UploadRecipe = () => {
     formData.append('file', file);
 
     try {
-      await axios.post('/api/recipes/upload', formData, {
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/recipes/upload`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       alert('Recipe uploaded!');
