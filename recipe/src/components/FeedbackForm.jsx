@@ -1,6 +1,7 @@
 import {useState,useEffect} from 'react';
 import axios from 'axios';
 const FeedbackForm=()=>{
+
     const[message,setMessage]=useState('');
     const [status,setStatus]=useState(null);
     const [feedbackList,setFeedbackList]=useState([]);
@@ -10,7 +11,7 @@ const FeedbackForm=()=>{
     },[]);
     const fetchFeedback=async()=>{
         try{
-        const res=await axios.get('/api/feedback',{message});
+        const res=await axios.get(`${process.env.REACT_APP_API_URL}/api/feedback`,{message});
         if(Array.isArray(res.data)){
         setFeedbackList(res.data);
         }else
@@ -27,7 +28,7 @@ const FeedbackForm=()=>{
     e.preventDefault();
     const token = localStorage.getItem('token');
     try{
-        await axios.post('/api/feedback',{message},{
+        await axios.post(`${process.env.REACT_APP_API_URL}/api/feedback`,{message},{
           headers: {
             Authorization: `Bearer ${token}`,
           },
