@@ -10,8 +10,7 @@ const app=express();
 app.use(express.json());
 
 app.use(cors({
-  origin: process.env.CLIENT_URL||'*', // e.g. 'https://your-frontend.com'
-  credentials: true,
+  origin:|'*', 
 }));
 
 mongoose.connect(process.env.MONGODB_URI,{
