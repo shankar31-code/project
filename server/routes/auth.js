@@ -23,6 +23,7 @@ router.post('/register',async(req,res)=>{
 //login endpoint
 router.post('/login',async(req,res)=>{
     const{username,password}=req.body;
+    try{
     const user =await User.findOne({username});
     if(!user)
     {
@@ -38,10 +39,21 @@ router.post('/login',async(req,res)=>{
     }
     const token=jwt.sign({userId:user._id,username:user.username},
         JWT_SECRET,{
-           expiresIn:'1d' 
+           expiresIn:'1h' 
         }
     );
+     res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax', // or 'none' if using HTTPS and cross-site
+      maxAge: 3600000, // 1 hour
+    });
     res.json({token});
+    }
+    catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
 });
 router.get('/protected', authMiddleware, (req, res) => {
     res.json({ message: `Welcome user ${req.user.userId}` });
