@@ -11,8 +11,10 @@ const ProtectedPage=()=>{
               headers: {
                 Authorization: `Bearer ${token}`,
               },
+                 withCredentials: true,
             });
             setMessage(res.data.message);
+              setLoading(false);
           } catch (err) {
             setError(err.response?.data?.message || 'Access denied');
           }
