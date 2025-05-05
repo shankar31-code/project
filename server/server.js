@@ -5,9 +5,12 @@ import cors from 'cors';
 import router from './routes/feedback.js';
 import authRoutes from './routes/auth.js'
 import recipeRoutes from './routes/recipes.js';
+import cookieParser from 'cookie-parser';
+
 dotenv.config();
 const app=express();
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(cors({
   origin: process.env.CLIENT_URL,
