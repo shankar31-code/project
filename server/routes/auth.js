@@ -48,7 +48,7 @@ router.post('/login',async(req,res)=>{
       sameSite: 'lax', // or 'none' if using HTTPS and cross-site
       maxAge: 3600000, // 1 hour
     });
-    res.json({token});
+   res.status(200).json({ message: 'Login successful' });
     }
     catch (err) {
     console.error(err);
