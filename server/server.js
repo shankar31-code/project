@@ -30,7 +30,7 @@ app.use('/api/feedback', router);
 app.use('/api/auth',authRoutes);
 app.use('/api/recipes',recipeRoutes);
 app.listen(process.env.PORT || 5000,()=>{
-    console.log(`server running on port ${process.env.port}`);
+    console.log(`server running on port ${process.env.PORT}`);
     console.log("Mongo URI:", process.env.MONGODB_URI);
 })
 
