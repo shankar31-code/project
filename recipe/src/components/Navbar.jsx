@@ -5,17 +5,26 @@ const Navbar=({isAuth,setIsAuth})=>{
   const [username, setUsername] = useState('');
   const navigate=useNavigate();
   useEffect(() => {
-    const storedUsername = localStorage.getItem('username');
-    if (storedUsername) {
-      setUsername(storedUsername);
+   const fetchUsername = async () => {
+      try {
+        // Make a request to get the protected route and fetch username from the backend
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/protected`, { withCredentials: true });
+        setUsername(res.data.username); // Assuming the response includes the username
+      } catch (err) {
+        console.log("Error fetching username:", err);
+      }
+    };
+
+    if (isAuth) {
+      fetchUsername();
     }
   }, [isAuth]);
   const handleLogout = () => {
     // Remove token and username from localStorage on logout
-    localStorage.removeItem('token');
-    localStorage.removeItem('username');
+   
     
     // Redirect to login page after logout
+     navigate('/login');
     navigate('/login');
     
     window.location.reload();
