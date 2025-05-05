@@ -5,10 +5,13 @@ const ProtectedCheck = () => {
   const handleClick = async () => {
     try {
       
+const token = localStorage.getItem('token'); // Get the token from localStorage
       const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/protected`, {
-        withCredentials: true, // This ensures that the cookies are sent with the request
+        headers: {
+          Authorization: `Bearer ${token}`, // Add the token to the Authorization header
+        },
+        withCredentials: true, // Ensure cookies are sent with the request
       });
-      alert(res.data.message);
     } catch (err) {
       alert('Access denied');
     }
