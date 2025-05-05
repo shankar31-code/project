@@ -11,7 +11,9 @@ const FeedbackForm=()=>{
     },[]);
     const fetchFeedback=async()=>{
         try{
-        const res=await axios.get(`${process.env.REACT_APP_API_URL}/api/feedback`,{message});
+        const res=await axios.get(`${process.env.REACT_APP_API_URL}/api/feedback`,{message},{
+  withCredentials: true, // ✅ sends cookie to backend
+});
         if(Array.isArray(res.data)){
         setFeedbackList(res.data);
         }else
@@ -26,13 +28,11 @@ const FeedbackForm=()=>{
   };
   const handleSubmit=async (e)=>{
     e.preventDefault();
-    const token = localStorage.getItem('token');
+
     try{
         await axios.post(`${process.env.REACT_APP_API_URL}/api/feedback`,{message},{
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+  withCredentials: true, // ✅ sends cookie to backend
+});
         setStatus('Feedback Submitted');
         setMessage('');
         fetchFeedback();
