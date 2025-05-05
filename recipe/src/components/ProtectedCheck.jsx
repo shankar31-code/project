@@ -4,11 +4,9 @@ import axios from 'axios';
 const ProtectedCheck = () => {
   const handleClick = async () => {
     try {
-      const token = localStorage.getItem('token');
+      
       const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/protected`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        withCredentials: true, // This ensures that the cookies are sent with the request
       });
       alert(res.data.message);
     } catch (err) {
