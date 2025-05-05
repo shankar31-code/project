@@ -18,7 +18,7 @@ const LoginForm = ({setAuth}) => {
       
     // 👇 Redirect to home or recipes page
       navigate('/');
-      window.location.reload();
+      
       
 
       console.log("successfull");
