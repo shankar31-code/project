@@ -11,18 +11,10 @@ const LoginForm = ({setAuth}) => {
     e.preventDefault();
     try {
       const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, { username, password },{ withCredentials: true });
-      if(res.data.token){
-      localStorage.setItem('token', res.data.token);
-
+      if(res.data.message=='Login successful'){
       
-        // Decode token and save username
-      const decoded = JSON.parse(atob(res.data.token.split('.')[1]));
-      if (decoded && decoded.username) {
-        localStorage.setItem('username', decoded.username);
-      } else {
-        console.error('Username not found in token payload');
-      }
       setAuth(true);
+      
       
     // 👇 Redirect to home or recipes page
       navigate('/');
@@ -31,6 +23,7 @@ const LoginForm = ({setAuth}) => {
 
       console.log("successfull");
       console.log(decoded);
+          
       }
         else {
         // Handle case where no token is returned
