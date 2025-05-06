@@ -11,9 +11,11 @@ const FeedbackForm=()=>{
     },[]);
     const fetchFeedback=async()=>{
         try{
-        const res=await axios.get(`${process.env.REACT_APP_API_URL}/api/feedback`,{message},{
-  withCredentials: true, // ✅ sends cookie to backend
+       axios.get(`${import.meta.env.VITE_API_URL}/api/feedback`, {
+  params: { message },
+  withCredentials: true,
 });
+
         if(Array.isArray(res.data)){
         setFeedbackList(res.data);
         }else
@@ -30,9 +32,10 @@ const FeedbackForm=()=>{
     e.preventDefault();
 
     try{
-        await axios.post(`${process.env.REACT_APP_API_URL}/api/feedback`,{message},{
-  withCredentials: true, // ✅ sends cookie to backend
-});
+        await axios.post(`${import.meta.env.VITE_API_URL}/api/feedback`, { message }, {
+    withCredentials: true, // ✅ sends cookie to backend
+  });
+
         setStatus('Feedback Submitted');
         setMessage('');
         fetchFeedback();
