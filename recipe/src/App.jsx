@@ -26,7 +26,7 @@ function App() {
     const checkAuth = async () => {
       try {
         // Send a request to the backend's protected route to check if the user is authenticated
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/protected`, {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/protected`, {
           withCredentials: true, // Send cookies with the request
         });
 
@@ -36,9 +36,7 @@ function App() {
         }
       } catch (err) {
         setIsAuth(false); // User is not authenticated (error occurs)
-      } finally {
-        setLoading(false); // Stop loading once the check is done
-      }
+      } 
     };
 
     checkAuth();
