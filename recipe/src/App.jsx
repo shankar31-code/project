@@ -31,7 +31,7 @@ function App() {
         });
 
         // If the response is successful (status 200), the user is authenticated
-        if (res.status === 200) {
+        if (res.status === 200 && res.data.username)  {
           setIsAuth(true); // User is authenticated
         }
       } catch (err) {
