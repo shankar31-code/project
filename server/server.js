@@ -23,6 +23,7 @@ mongoose.connect(process.env.MONGODB_URI)
 .catch(err=>{
     console.error("mongoDB connection error:",err);
 })
+app.use('/api', authRoutes);
 app.use('/api/feedback', router);
 app.use('/api/auth',authRoutes);
 app.use('/api/recipes',recipeRoutes);
