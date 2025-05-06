@@ -56,6 +56,6 @@ router.post('/login',async(req,res)=>{
   }
 });
 router.get('/protected', authMiddleware, (req, res) => {
-    res.json({ message: `Welcome user ${req.user.userId}` });
-  });
+  res.json({ username: req.user.username }); // ✅ send the username
+});
 export default router;
