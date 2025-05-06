@@ -9,7 +9,7 @@ const Navbar=({isAuth,setIsAuth})=>{
    const fetchUsername = async () => {
       try {
         // Make a request to get the protected route and fetch username from the backend
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/protected`, { withCredentials: true });
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/protected`, { withCredentials: true });
         setUsername(res.data.username); // Assuming the response includes the username
       } catch (err) {
         console.log("Error fetching username:", err);
