@@ -20,8 +20,29 @@ import ProtectedPage from './components/ProtectedPage';
 import ProtectedCheck from './components/ProtectedCheck';
 import UploadRecipe from './components/UploadRecipe';
 function App() {
-  const [isAuth, setIsAuth] = useState(!!localStorage.getItem('token'));
+ const [isAuth, setIsAuth] = useState(false);
 
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        // Send a request to the backend's protected route to check if the user is authenticated
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/protected`, {
+          withCredentials: true, // Send cookies with the request
+        });
+
+        // If the response is successful (status 200), the user is authenticated
+        if (res.status === 200) {
+          setIsAuth(true); // User is authenticated
+        }
+      } catch (err) {
+        setIsAuth(false); // User is not authenticated (error occurs)
+      } finally {
+        setLoading(false); // Stop loading once the check is done
+      }
+    };
+
+    checkAuth();
+  }, []);
 
   const [quote,setQuote]=useState(null);
   const [author,setAuthor]=useState(null);
