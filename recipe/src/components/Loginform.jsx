@@ -14,7 +14,7 @@ const LoginForm = ({setAuth}) => {
       if(res.data.message=='Login successful'){
       
       setAuth(true);
-      
+       setUsername(res.data.username);
       
     // 👇 Redirect to home or recipes page
       navigate('/');
@@ -22,7 +22,7 @@ const LoginForm = ({setAuth}) => {
       
 
       console.log("successfull");
-      console.log(decoded);
+   
           
       }
         else {
