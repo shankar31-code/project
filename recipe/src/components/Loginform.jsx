@@ -16,8 +16,9 @@ const LoginForm = ({setAuth}) => {
       setAuth(true);
        setUsername(res.data.username);
       
-    // 👇 Redirect to home or recipes page
-    window.location.href = '/';
+
+navigate('/'); // smoother SPA-style redirect
+
           console.log(res.data.username);
 
       
