@@ -10,7 +10,7 @@ const LoginForm = ({setAuth}) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, { username, password });
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, { username, password },{ withCredentials: true});
       if(res.data.message=='Login successful'){
       
       setAuth(true);
