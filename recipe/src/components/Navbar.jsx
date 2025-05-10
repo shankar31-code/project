@@ -1,66 +1,65 @@
-import {Link} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { useState,useEffect } from 'react';
-const Navbar=({isAuth,setIsAuth})=>{
+import { useState, useEffect } from 'react';
+
+const Navbar = ({ isAuth, setIsAuth }) => {
   const [username, setUsername] = useState('');
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+
+  // Fetch username on mount or when isAuth changes
   useEffect(() => {
-   const fetchUsername = async () => {
+    const fetchUsername = async () => {
       try {
-        // Make a request to get the protected route and fetch username from the backend
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/protected`, { withCredentials: true });
-        setUsername(res.data.username); // Assuming the response includes the username
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/protected`, {
+          withCredentials: true,
+        });
+        setUsername(res.data.username); // Make sure your backend returns { username }
+        setIsAuth(true);
       } catch (err) {
-        console.log("Error fetching username:", err);
+        console.log('User not authenticated:', err);
+        setIsAuth(false);
+        setUsername('');
       }
     };
 
-    if (isAuth) {
-      fetchUsername();
+    fetchUsername();
+  }, [setIsAuth]);
+
+  // Logout logic
+  const handleLogout = async () => {
+    try {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/logout`, {}, {
+        withCredentials: true,
+      });
+      setIsAuth(false);
+      setUsername('');
+      navigate('/login');
+    } catch (err) {
+      console.error('Logout failed:', err);
     }
-  }, [isAuth]);
-  const handleLogout = () => {
-    // Remove token and username from localStorage on logout
-   
-    
-    // Redirect to login page after logout
-     navigate('/login');
-    
-    
-    window.location.reload();
   };
 
-  return(
-    <div className={`flex
-    item-center justify-between  bg-blue-500 p-5`}>
-    <h1 className="text-xl font-bold">RECIPE FINDER</h1>
-    
-    <div className="flex items-center space-x-4">
-           
+  return (
+    <div className="flex items-center justify-between bg-blue-500 p-5">
+      <h1 className="text-xl font-bold text-white">RECIPE FINDER</h1>
 
-        {username ? (
+      <div className="flex items-center space-x-4 text-white">
+        {isAuth && username ? (
           <>
-          <Link to="/upload-recipe" className="mx-2 hover:underline">
-  Upload Recipe
-</Link>
-
-                  <Link to="/feedback" className="hover:underline">
-          Feedback
-        </Link>
+            <Link to="/upload-recipe" className="hover:underline">Upload Recipe</Link>
+            <Link to="/feedback" className="hover:underline">Feedback</Link>
             <span className="text-sm">Welcome, {username}!</span>
-            <button onClick={handleLogout} className="mx-2 hover:underline">
-              Logout
-            </button>
+            <button onClick={handleLogout} className="hover:underline">Logout</button>
           </>
-        ) :(<> 
-        <Link to="/register" className="mx-2">Register</Link>
-<Link to="/login" className="mx-2">Login</Link>
-</>)}
-
+        ) : (
+          <>
+            <Link to="/register" className="hover:underline">Register</Link>
+            <Link to="/login" className="hover:underline">Login</Link>
+          </>
+        )}
+      </div>
     </div>
-    </div>
-)
+  );
+};
 
-}
 export default Navbar;
