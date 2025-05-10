@@ -7,24 +7,24 @@ const Navbar = ({ isAuth, setIsAuth }) => {
   const navigate = useNavigate();
 
   // Fetch username on mount or when isAuth changes
-  useEffect(() => {
-   const fetchUsername = async () => {
-      try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/protected`, {
-          withCredentials: true,
-        });
-        setUsername(res.data.username); // assumes backend returns { username }
-        setIsAuth(true);
-      } catch (err) {
-        console.log('User not authenticated:', err);
-        setIsAuth(false);
-        setUsername('');
-      }
-    };
+ 
+   useEffect(() => {
+  const fetchUsername = async () => {
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/protected`, {
+        withCredentials: true,
+      });
+      setUsername(res.data.username);
+      setIsAuth(true);
+    } catch (err) {
+      console.log('User not authenticated:', err);
+      setIsAuth(false);
+      setUsername('');
+    }
+  };
 
-    // Only fetch if user is (or might be) authenticated
-    if (isAuth) fetchUsername();
-  }, [isAuth, setIsAuth]); 
+  fetchUsername(); // Always attempt to fetch on mount
+}, []);
   // Logout logic
   const handleLogout = async () => {
     try {
