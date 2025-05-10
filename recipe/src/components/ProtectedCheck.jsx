@@ -7,7 +7,8 @@ const ProtectedCheck = () => {
       
  
       const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/protected`, {
-        withCredentials: true, // Ensure cookies are sent with the request
+        withCredentials: true
+     
       });
     } catch (err) {
       alert('Access denied');
