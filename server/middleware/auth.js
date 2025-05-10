@@ -7,8 +7,9 @@ export const authMiddleware=(req,res,next)=>{
     const token= req.cookies?.token;
     if(!token)
         {
+             console.log('NODE_ENV:', process.env.NODE_ENV);
             return res.status(401).json({ message: 'No token, access denied' });
-            console.log('NODE_ENV:', process.env.NODE_ENV);
+           
         }
         try{
           const decoded=
