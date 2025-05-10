@@ -44,7 +44,7 @@ const Navbar = ({ isAuth, setIsAuth }) => {
       <h1 className="text-xl font-bold text-white">RECIPE FINDER</h1>
 
       <div className="flex items-center space-x-4 text-white">
-        {isAuth && username ? (
+        {username ? (
           <>
             <Link to="/upload-recipe" className="hover:underline">Upload Recipe</Link>
             <Link to="/feedback" className="hover:underline">Feedback</Link>
