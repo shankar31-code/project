@@ -3,6 +3,8 @@ import axios from 'axios';
 const ProtectedPage=()=>{
     const [message,setMessage]=useState('');
     const [error,setError]=useState('');
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         const fetchProtectedData = async () => {
           try {
