@@ -24,7 +24,7 @@ const Navbar = ({ isAuth, setIsAuth }) => {
   };
 
   fetchUsername(); // Always attempt to fetch on mount
-}, []);
+}, [isAuth]);
   // Logout logic
   const handleLogout = async () => {
     try {
