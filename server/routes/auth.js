@@ -61,6 +61,6 @@ res.status(200).json({
   }
 });
 router.get('/protected', authMiddleware, (req, res) => {
-  res.json({ username: req.user.username }); // ✅ send the username
+  res.json({ username: user.username }); // ✅ send the username
 });
 export default router;
