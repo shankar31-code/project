@@ -2,30 +2,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-const Navbar = ({ isAuth, setIsAuth }) => {
-  const [username, setUsername] = useState('');
+const Navbar = ({ isAuth, setIsAuth, username, setUsername }) => {
+
   const navigate = useNavigate();
 
   // Fetch username on mount or when isAuth changes
  
-   useEffect(() => {
-  const fetchUsername = async () => {
-    try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/protected`, {
-        withCredentials: true,
-      });
-      console.log(res.data.username);
-      setUsername(res.data.username);
-      setIsAuth(true);
-    } catch (err) {
-      console.log('User not authenticated:', err);
-      setIsAuth(false);
-      setUsername('');
-    }
-  };
 
-  fetchUsername(); // Always attempt to fetch on mount
-}, []);
   // Logout logic
   const handleLogout = async () => {
     try {
