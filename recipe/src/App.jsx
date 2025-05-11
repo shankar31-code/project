@@ -21,6 +21,7 @@ import ProtectedCheck from './components/ProtectedCheck';
 import UploadRecipe from './components/UploadRecipe';
 function App() {
  const [isAuth, setIsAuth] = useState(false);
+  const [username, setUsername] = useState('');
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -32,10 +33,12 @@ function App() {
 
         // If the response is successful (status 200), the user is authenticated
         if (res.status === 200 && res.data.username)  {
-          setIsAuth(true); // User is authenticated
+          setIsAuth(true); 
+           setUsername(res.data.username);// User is authenticated
         }
       } catch (err) {
-        setIsAuth(false); // User is not authenticated (error occurs)
+        setIsAuth(false); 
+           setUsername('');// User is not authenticated (error occurs)
       } 
     };
 
@@ -107,7 +110,8 @@ return()=>clearInterval(intervalId);
     <div className='w-screen h-screen'>
  
 
-<Navbar isAuth={isAuth} setIsAuth={setIsAuth}></Navbar>
+<Navbar isAuth={isAuth} setIsAuth={setIsAuth} username={username} setUsername={setUsername} />
+
 <Routes>
 <Route path="/" element={<>
 
