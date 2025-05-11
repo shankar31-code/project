@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 const LoginForm = ({setAuth,setUsername }) => {
     const navigate=useNavigate();
+    const [inputUsername, setInputUsername] = useState('');
 
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -10,7 +11,7 @@ const LoginForm = ({setAuth,setUsername }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, { username, password },{ withCredentials: true});
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, { username : inputUsername, password },{ withCredentials: true});
       if(res.data.message=='Login successful'){
       
       setAuth(true);
@@ -45,8 +46,8 @@ navigate('/'); // smoother SPA-style redirect
     <input
       type="text"
       placeholder="Username"
-      value={username}
-      onChange={(e) => setUsername(e.target.value)}
+      value={inputUsername}
+      onChange={(e) => setInputUsername(e.target.value)}
       className="mb-4 p-3 border rounded w-full focus:outline-none focus:ring-2 focus:ring-green-500"
       required
     />
