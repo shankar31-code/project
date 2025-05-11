@@ -42,9 +42,9 @@ router.post('/login',async(req,res)=>{
            expiresIn:'1h' 
         }
     );
-     res.cookie('token', token, {
+     res.cookie('token',token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure:true,
       sameSite: 'None', // or 'none' if using HTTPS and cross-site
       maxAge: 3600000, // 1 hour
     });
