@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-const LoginForm = ({setAuth}) => {
+const LoginForm = ({setIsAuth}) => {
     const navigate=useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -13,7 +13,7 @@ const LoginForm = ({setAuth}) => {
       const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, { username, password },{ withCredentials: true});
       if(res.data.message=='Login successful'){
       
-      setAuth(true);
+      setIsAuth(true);
        setUsername(res.data.username);
       
 
