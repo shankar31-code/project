@@ -14,6 +14,7 @@ const Navbar = ({ isAuth, setIsAuth }) => {
       const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/protected`, {
         withCredentials: true,
       });
+      console.log(res.data.username);
       setUsername(res.data.username);
       setIsAuth(true);
     } catch (err) {
@@ -48,7 +49,7 @@ const Navbar = ({ isAuth, setIsAuth }) => {
           <>
             <Link to="/upload-recipe" className="hover:underline">Upload Recipe</Link>
             <Link to="/feedback" className="hover:underline">Feedback</Link>
-            <span className="text-sm">Welcome, {username}!</span>
+            <span className="text-sm">Welcome,{username}!</span>
             <button onClick={handleLogout} className="hover:underline">Logout</button>
           </>
         ) : (
