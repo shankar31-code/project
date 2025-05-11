@@ -6,7 +6,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 export const authMiddleware = (req, res, next) => {
   // Get the token from the cookies or headers (depending on where it's stored)
-  let token = req.cookies?.token;
+  let token = req.cookies.token;
 
   // Optional fallback: check the Authorization header if token not in cookies
   if (!token && req.headers.authorization?.startsWith('Bearer ')) {
