@@ -10,6 +10,7 @@ import cookieParser from 'cookie-parser';
 dotenv.config();
 const app=express();
 app.use(express.json());
+app.use(cookieParser());
 
 
 app.use(cors({
@@ -23,7 +24,7 @@ mongoose.connect(process.env.MONGODB_URI)
 .catch(err=>{
     console.error("mongoDB connection error:",err);
 })
-app.use(cookieParser());
+
 app.use('/api/feedback', router);
 app.use('/api/auth',authRoutes);
 app.use('/api/recipes',recipeRoutes);
