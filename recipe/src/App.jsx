@@ -134,7 +134,7 @@ return()=>clearInterval(intervalId);
     <Route path='/recipe/:id' element={<><RecipeDetail/></>}/>
    <Route path="/feedback" element={<FeedbackForm />} />
    <Route path="/register" element={<Register/>} />
-   <Route path="/login" element={<LoginForm setAuth={setIsAuth} />} />
+   <Route path="/login" element={<LoginForm setAuth={setIsAuth}  etUsername={setUsername} />}/>
    <Route path="/protected" element={<ProtectedPage />} />
    <Route path="/protected-check" element={<ProtectedCheck />} />
    <Route path="/upload-recipe" element={<UploadRecipe />} />
