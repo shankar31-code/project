@@ -20,7 +20,7 @@ import ProtectedPage from './components/ProtectedPage';
 import ProtectedCheck from './components/ProtectedCheck';
 import UploadRecipe from './components/UploadRecipe';
 function App() {
- const [isAuth, setIsAuth] = useState(false);
+ const [isAuth, setIsAuth] = useState(true);
 
   useEffect(() => {
     const checkAuth = async () => {
