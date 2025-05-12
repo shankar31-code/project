@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { Menu, X } from 'lucide-react'; 
 
 const Navbar = ({ isAuth, setIsAuth, username, setUsername }) => {
   const [menuOpen, setMenuOpen] = useState(false);
