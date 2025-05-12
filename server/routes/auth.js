@@ -60,6 +60,15 @@ res.status(200).json({
     res.status(500).json({ message: 'Server error' });
   }
 });
+router.post('/logout', (req, res) => {
+  res.clearCookie('token', {
+    httpOnly: true,
+    secure: true,       // Only if using HTTPS
+    sameSite: 'None'     // Or 'None' if cross-site and HTTPS
+  });
+  res.json({ message: 'Logged out successfully' });
+});
+
 router.get('/protected', authMiddleware, (req, res) => {
   res.json({ username: user.username }); // ✅ send the username
 });
