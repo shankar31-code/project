@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 const Navbar = ({ isAuth, setIsAuth, username, setUsername }) => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
 
   const navigate = useNavigate();
 
