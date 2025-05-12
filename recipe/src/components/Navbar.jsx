@@ -17,7 +17,7 @@ const Navbar = ({ isAuth, setIsAuth, username, setUsername }) => {
       });
       setIsAuth(false);
       setUsername('');
-      navigate('/login');
+      navigate('/');
     } catch (err) {
       console.error('Logout failed:', err);
     }
