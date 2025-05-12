@@ -11,7 +11,7 @@ const FeedbackForm=()=>{
     },[]);
     const fetchFeedback=async()=>{
         try{
-       axios.get(`${import.meta.env.VITE_API_URL}/api/feedback`, {
+       await axios.get(`${import.meta.env.VITE_API_URL}/api/feedback`, {
   params: { message },
   withCredentials: true,
 });
